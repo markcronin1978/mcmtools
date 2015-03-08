@@ -1,8 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ie.cit.adf</groupId>
   <artifactId>mcmtools</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
   
 <!-- properties is used so that we can change the revision in one go -->
   	<properties>
@@ -25,6 +29,16 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	<dependency>
 		<groupId>postgresql</groupId>
 	 	<artifactId>postgresql</artifactId>
