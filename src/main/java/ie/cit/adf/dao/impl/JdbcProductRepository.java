@@ -24,7 +24,6 @@ public class JdbcProductRepository implements ProductRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
 	public List<Product> findAll() {
 		String sql = "SELECT * FROM product";                        
 		return jdbcTemplate.query(sql, new ProductMapper());
