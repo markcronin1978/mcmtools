@@ -17,5 +17,7 @@
 		<property name="username" value="cwqnrthb"></property>
 		<property name="password" value="AowWg9RWOS27qNAz8-WrZ_bLu0GEFkJR"></property>
 	</bean>
-
+	
+	<context:component-scan base-package="ie.cit.adf.dao"/>
+	
 </beans>

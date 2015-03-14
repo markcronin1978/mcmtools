@@ -1,4 +1,4 @@
-package ie.cit.adf.domin;
+package ie.cit.adf.domain;
 
 import java.util.UUID;
 

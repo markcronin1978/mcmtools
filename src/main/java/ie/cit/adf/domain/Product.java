@@ -1,4 +1,4 @@
-package ie.cit.adf.domin;
+package ie.cit.adf.domain;
 
 import java.util.UUID;
 
@@ -6,19 +6,34 @@ public class Product {
 	
 	private String id;
 	private int SKU;
+	private String name;
 	private String description;
 	private double pricePerUnit;
 	private int stockLevel;
 	
+	public Product(){
+		
+	}
 	
-	public Product(String id, int sKU, String description, double pricePerUnit,
+	public Product(String id, int sKU, String name, String description, double pricePerUnit,
 			int stockLevel) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		SKU = sKU;
+		this.name = name;
 		this.description = description;
 		this.pricePerUnit = pricePerUnit;
 		this.stockLevel = stockLevel;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 
