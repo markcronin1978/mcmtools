@@ -2,7 +2,7 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
-public class saleOrders {
+public class SaleOrder {
 
 	private String id;
 	private int customerId;
@@ -10,7 +10,11 @@ public class saleOrders {
 	private int quantity;
 	private double cost;	
 	
-	public saleOrders(String id, int customerId, int productSKU, int quantity) {
+	public SaleOrder(){
+		
+	}
+	
+	public SaleOrder(String id, int customerId, int productSKU, int quantity) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.customerId = customerId;
@@ -60,7 +64,7 @@ public class saleOrders {
 
 	@Override
 	public String toString() {
-		return "saleOrders [id=" + id + ", customerId=" + customerId
+		return "SaleOrder [id=" + id + ", customerId=" + customerId
 				+ ", productSKU=" + productSKU + ", quantity=" + quantity
 				+ ", cost=" + cost + "]";
 	}

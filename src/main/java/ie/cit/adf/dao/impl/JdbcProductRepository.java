@@ -10,6 +10,7 @@ import ie.cit.adf.domain.Product;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,11 @@ public class JdbcProductRepository implements ProductRepository {
 	public List<Product> findAll() {
 		String sql = "SELECT * FROM product";                        
 		return jdbcTemplate.query(sql, new ProductMapper());
+	}
+
+	public Product getBySku(int SKU) {
+		String sql = "SELECT * From product WHERE SKU = ?";		
+		return jdbcTemplate.queryForObject(sql, new ProductMapper(), SKU);  
 	}
 
 }
