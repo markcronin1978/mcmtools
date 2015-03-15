@@ -21,7 +21,7 @@ public class SaleOrderController {
 	SaleOrder so = new SaleOrder();	
 	
 	@Autowired									  
-	SaleOrderService saleOrderService;
+	private SaleOrderService saleOrderService;
 	
 	//Return a list of all products to the ProductOrderForm
 	@RequestMapping(value="/", method=RequestMethod.GET) 

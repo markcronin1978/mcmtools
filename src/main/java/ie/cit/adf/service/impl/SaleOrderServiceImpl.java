@@ -17,12 +17,14 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 	@Autowired
 	ProductRepository pr;
 	
+	//list all products
 	public List<Product> findAll(){
 		return pr.findAll();
 	}
 
+	//list product with specific sku number
 	public Product getBySKU(int sku){
-		return pr.getBySku(sku);
+		return pr.getBySKU(sku);
 	}
 	
 }

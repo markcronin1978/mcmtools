@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class ProductMapper implements RowMapper<Product> {
 
+	
+	//read product information from database 
 	public Product mapRow(ResultSet rs, int i) throws SQLException {
 		Product p = new Product();
 		p.setId(rs.getString("id"));

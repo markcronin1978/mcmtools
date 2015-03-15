@@ -1,21 +1,17 @@
 package ie.cit.adf.service;
 
 
-import ie.cit.adf.domain.Product;
-
+import ie.cit.adf.domain.Customer;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
-public interface SaleOrderService {
-	
-	//list all products.
-	List<Product> findAll();  
+public interface CustomerService {
 
-	//list product with specific sku number
-	Product getBySKU(int sku);
+	//List all Customers
+	List<Customer> findAll();
 	
+	void save(Customer customer);
 }

@@ -12,7 +12,7 @@ public class Product {
 	private int stockLevel;
 	
 	public Product(){
-		
+		this.id = UUID.randomUUID().toString();
 	}
 	
 	public Product(String id, int sKU, String name, String description, double pricePerUnit,

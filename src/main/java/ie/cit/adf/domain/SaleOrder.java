@@ -11,7 +11,7 @@ public class SaleOrder {
 	private double cost;	
 	
 	public SaleOrder(){
-		
+		this.id = UUID.randomUUID().toString();
 	}
 	
 	public SaleOrder(String id, int customerId, int productSKU, int quantity) {
