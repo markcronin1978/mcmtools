@@ -15,7 +15,7 @@ public interface ProductService {
 	List<Product> findAll();
 
 	//saves product 
-	void insert(Product product);
+	void save(Product product);
 	
 
 }

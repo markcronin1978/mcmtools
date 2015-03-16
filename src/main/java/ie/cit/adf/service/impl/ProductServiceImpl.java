@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	//Save new product
-	public void insert(Product product) {
+	public void save(Product product) {
 		productRepository.save(product);		
 	}
 	

@@ -14,7 +14,7 @@
 						</tr>
 						<c:forEach var="prod" items="${products}">
 							<tr>
-								<td><p><a href='<c:url value="${prod.SKU}"/>'>${prod.SKU}</a></td><td>${prod.name}</td><td>${prod.description}</td><td>${prod.pricePerUnit}</td><td>${prod.stockLevel}</p></td>
+								<td><p>${prod.SKU}</td><td>${prod.name}</td><td>${prod.description}</td><td>${prod.pricePerUnit}</td><td>${prod.stockLevel}</p></td>
 							</tr>
 						</c:forEach>
 				

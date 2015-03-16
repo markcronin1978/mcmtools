@@ -36,8 +36,8 @@ public class ProductController {
 	
 	// saves a new product
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String insert(@ModelAttribute Product product) {
-		productService.insert(product);	
+	public String save(@ModelAttribute Product product) {
+		productService.save(product);	
 		return "redirect:/product/";
 	}
 }

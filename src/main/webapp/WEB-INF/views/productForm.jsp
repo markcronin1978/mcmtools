@@ -8,7 +8,7 @@
 			
 			<p>Add Product</p>
 				<c:url value="/product/" var="form_url"/>
-				 	<form:form action="${form_url}" commandName="product">
+				 	<form:form method="post" action="${form_url}" commandName="product">
 						<table align="center">
 							<tr>
 								<td>Stock Keeping Unit:</td>

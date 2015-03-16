@@ -9,7 +9,7 @@
 			
 			<h2>Customer List:</h2>
 				<c:forEach var="cust" items="${customers}">
-					<p><a href='<c:url value="/customer/${cust.id}/"/>'>${cust.firstName} ${cust.lastName}</a></p> 
+					<p>${cust.firstName} ${cust.lastName}</a></p> 
 				</c:forEach>     
 	
 	<jsp:include page="footer.jsp" />
