@@ -12,8 +12,12 @@ import ie.cit.adf.service.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService{
 	
+	private CustomerRepository customerRepository;
+	
 	@Autowired
-	CustomerRepository customerRepository;
+	public CustomerServiceImpl(CustomerRepository customerRepository){
+		this.customerRepository = customerRepository;
+	}
 
 	//list all customers and return in list
 	public List<Customer> findAll() {
@@ -22,6 +26,7 @@ public class CustomerServiceImpl implements CustomerService{
 
 	//save a new customer
 	public void save(Customer customer) {
+		System.out.println("ServiceIMpl");
 		customerRepository.save(customer);		
 	}
 

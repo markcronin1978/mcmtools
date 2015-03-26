@@ -15,27 +15,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/customer")
 public class CustomerController {
 	
-	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	public CustomerController(CustomerService customerService){
+		this.customerService = customerService;
+	}
 	
 	// Display Customer List
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listCustomers(Model model) {
 		model.addAttribute("customers", customerService.findAll());
+		System.out.println("Here ListCustomerMethod");
 		return "customerList";
 	}
 	
 	//display new Customer form
 	@RequestMapping(value="/add", method=RequestMethod.GET)
-	public String formProduct(Model model) {
+	public String formCustomer(Model model) {
 		model.addAttribute("customer", new Customer());
 		return "customerForm";
 	}
 	
-	// saves a new product
+	// saves a new Customer
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute Customer customer) {
+	public String addCustomer(@ModelAttribute Customer customer) {
+		System.out.println("CustomerContorller");
 		customerService.save(customer);	
+		System.out.println("CustomerContorller1");
 		return "redirect:/customer/";
 	}
 

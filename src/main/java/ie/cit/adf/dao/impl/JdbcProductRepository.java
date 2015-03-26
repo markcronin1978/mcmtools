@@ -80,5 +80,13 @@ public class JdbcProductRepository implements ProductRepository {
 						product.getDescription(),product.getPricePerUnit(), 
 						product.getStockLevel(), product.getSKU());
 	}
+	
+	//return quantity of selected item for purchase.
+	public int getQuantityBySKU(int productSKU) {
+		String sql = "SELECT * FROM product WHERE sku = ?";
+		Product quantity = jdbcTemplate.queryForObject(sql, new ProductMapper(),productSKU);
+		return quantity.getStockLevel();
+		
+	}
 
 }

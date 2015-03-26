@@ -17,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/product")
 public class ProductController {
 	
-	@Autowired
+	
 	private ProductService productService;
+	
+	@Autowired
+	public ProductController(ProductService productService){
+		this.productService = productService;
+	}
 	
 	//returns a list of all products..
 	@RequestMapping(value="/", method=RequestMethod.GET)             

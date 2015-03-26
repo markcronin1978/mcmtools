@@ -11,5 +11,8 @@ public interface CustomerRepository {
 	
 	//save a new customer
 	void save(Customer customer);
-
+	
+	//return customer by email address
+	Customer getByEmailAddress(String email);
+	
 }

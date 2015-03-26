@@ -28,6 +28,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
 	
 	//list all customers.
 	public List<Customer> findAll() {
+		System.out.println("JDBC FIle");
 		String sql = "SELECT * FROM customer";
 		return jdbcTemplate.query(sql, new CustomerMapper());
 	}
@@ -35,7 +36,7 @@ public class JdbcCustomerRepository implements CustomerRepository {
 	//checks to see if new or update product action is required
 	public void save(Customer customer) {
 		if (searchByEmail(customer.getEmail()) == null) {
-			System.out.println("SQL CHECK FOR EXISTING SKU");
+			System.out.println("JDBC FIle");
 			add(customer);
 		} else {
 			update(customer);
@@ -72,4 +73,11 @@ public class JdbcCustomerRepository implements CustomerRepository {
 						customer.getAddress1(), customer.getAddress2(), customer.getAddress3(), customer.getPassword(), 
 						customer.getEmail());
 	}
+
+	//return customer by email address
+	public Customer getByEmailAddress(String email) {
+		String sql = "SELECT * FROM customer WHERE email = ?";
+		return jdbcTemplate.queryForObject(sql, new CustomerMapper(), email);
+	}
+
 }

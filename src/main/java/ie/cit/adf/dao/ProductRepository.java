@@ -15,4 +15,7 @@ public interface ProductRepository {
 
 	//save new product
 	void save(Product product);
+
+	//return quantity of product by SKU number
+	int getQuantityBySKU(int productSKU);
 }

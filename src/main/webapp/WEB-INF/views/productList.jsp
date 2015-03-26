@@ -6,7 +6,6 @@
 				
 
 			<h2>Product List:</h2>
-			<h3>To Edit Product Information, Click on Product Stock Keeping Unit Number</h3>
 
 					<table align="center">
 						<tr>
