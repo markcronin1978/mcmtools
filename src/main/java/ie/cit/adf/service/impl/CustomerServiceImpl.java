@@ -30,4 +30,10 @@ public class CustomerServiceImpl implements CustomerService{
 		customerRepository.save(customer);		
 	}
 
+	//created for testing purposes
+	public Customer getById(String Id) {
+		System.out.println("ServiceIMpl");
+		return customerRepository.getById(Id);
+	}
+
 }

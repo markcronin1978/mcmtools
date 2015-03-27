@@ -80,4 +80,14 @@ public class JdbcCustomerRepository implements CustomerRepository {
 		return jdbcTemplate.queryForObject(sql, new CustomerMapper(), email);
 	}
 
+	public Customer getById(String id) {
+		String sql = "SELECT * FROM customer WHERE id = ?";
+		return jdbcTemplate.queryForObject(sql, new CustomerMapper(), id);
+	}
+
+	public List<Customer> getByCity(String city) {
+		String sql = "SELECT * FROM customer WHERE address3 = ?";
+		return jdbcTemplate.query(sql, new CustomerMapper(), city);
+	}
+	
 }

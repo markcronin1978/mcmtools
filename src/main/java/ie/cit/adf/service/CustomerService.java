@@ -17,5 +17,8 @@ public interface CustomerService {
 	
 	//save Customer information
 	void save(Customer customer);
+	
+	//return customer byID
+	Customer getById(String Id);
 		
 }

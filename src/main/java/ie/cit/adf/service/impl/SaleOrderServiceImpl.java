@@ -17,29 +17,30 @@ import org.springframework.stereotype.Service;
 public class SaleOrderServiceImpl implements SaleOrderService {
 
 	
-	private ProductRepository pr;
-	private CustomerRepository cr;
+	private ProductRepository producRepository;
+	private CustomerRepository customerRepository;
 	
 	@Autowired
-	public SaleOrderServiceImpl(ProductRepository pr, CustomerRepository cr){
-		this.cr = cr;
-		this.pr = pr;
+	public SaleOrderServiceImpl(ProductRepository producRepository, CustomerRepository customerRepository){
+		this.customerRepository = customerRepository;
+		this.producRepository = producRepository;
 	}
 	//list all products
 	public List<Product> findAll(){
-		return pr.findAll();
+		return producRepository.findAll();
 	}
 
 	//list product with specific sku number
 	public Product getBySKU(int sku){
-		return pr.getBySKU(sku);
+		return producRepository.getBySKU(sku);
 	}
 
 	public Customer getByEmailAddress(String email) {
-		return cr.getByEmailAddress(email);
+		return customerRepository.getByEmailAddress(email);
 	}
+	
 	public int getQuantityBySKU(int productSKU) {
-		return pr.getQuantityBySKU(productSKU);
+		return producRepository.getQuantityBySKU(productSKU);
 	}
 	
 }

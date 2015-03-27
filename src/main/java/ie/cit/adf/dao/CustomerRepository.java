@@ -14,5 +14,9 @@ public interface CustomerRepository {
 	
 	//return customer by email address
 	Customer getByEmailAddress(String email);
+
+	Customer getById(String Id);
+
+	List<Customer> getByCity(String city);
 	
 }

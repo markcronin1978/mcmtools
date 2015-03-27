@@ -13,8 +13,13 @@ import ie.cit.adf.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService{
 
+	
+	private ProductRepository productRepository;
+	
 	@Autowired
-	ProductRepository productRepository;
+	public ProductServiceImpl(ProductRepository productRepository){
+		this.productRepository = productRepository;
+	}
 	
 	//List all Products
 	public List<Product> findAll(){
