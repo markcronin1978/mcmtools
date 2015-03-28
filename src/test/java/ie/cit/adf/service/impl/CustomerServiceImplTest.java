@@ -9,6 +9,7 @@ import ie.cit.adf.dao.CustomerRepository;
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.service.CustomerService;
 import static org.mockito.Mockito.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,39 +37,58 @@ public class CustomerServiceImplTest {
 		c.setEmail("tomhardy@gmail.com");
 		c.setPassword("password");
 		
-		/**what i am basically doing here is that when the customerRepository.getById 
-		 * method is called then return the new customer i checked for testing processes**/
+		/**
+		 * what i am basically doing here is that when the customerRepository.getById 
+		 * method is called then return the new customer i checked for testing processes*
+		 */
 		when(customerRepository.getById("1L")).thenReturn(c);
 		
-		/**To verify that the customerRepository.findAll method is working,
-		 * I have added the above customer to an arraylist**/
+		/**
+		 * To verify that the customerRepository.findAll method is working,
+		 * I have added the above customer to an arraylist
+		 */
 		List<Customer> clist = new ArrayList<Customer>();
 		clist.add(c);
 		
-		/**When the customerRepository.findAll method is called it is expected a list
+		/**
+		 * When the customerRepository.findAll method is called it is expected a list
 		 * in return, when the tester method findAll is called it will receive a list
-		 * with the above customer in it!!**/
+		 * with the above customer in it!!
+		 */
 		when(customerRepository.findAll()).thenReturn(clist);
 		
-		/**I have put this into the setup method so that the customer will be saved when
+		/**
+		 * I have put this into the setup method so that the customer will be saved when
 		 * the testing begins. This will be used to verify that the customerRepository.save
-		 * method is working**/
+		 * method is working
+		 */
 		tested.save(c);
 		
 	}
-	
+	/**
+	 * method to test getById function
+	 */
 	@Test
 	public void testGetById(){
-		String firstName = tested.getById("1L").getFirstName();
-		String secondName = tested.getById("1L").getLastName();
-		assertTrue(firstName.equals("Tom") && secondName.equals("Hardy"));
-		
-	}
-	@Test
-	public void testListCustomers(){
-		assertEquals(1, tested.findAll().size());		
+		String id = "1L";
+		String firstName = tested.getById(id).getFirstName();
+		String secondName = tested.getById(id).getLastName();
+		assertThat(firstName, is("Tom"));
+		assertThat(secondName, is("Hardy"));	
 	}
 	
+	/**
+	 * method to test listCustomers function
+	 */
+	@Test
+	public void testListCustomers(){
+		assertThat(1,is(tested.findAll().size()));
+		verify(customerRepository).findAll();
+	}
+	
+	/**
+	 * method to test save customer function*
+	 */
 	@Test
 	public void testSave(){			
 		Mockito.verify(customerRepository).save(Mockito.argThat(new ArgumentMatcher<Customer>(){
@@ -78,33 +98,4 @@ public class CustomerServiceImplTest {
 			}
 		}));
 	}
-	
-	/**
-	@Before
-	public void setup() {
-		customerRepository = mock(CustomerRepository.class);
-
-
-		
-		when(customerRepository.getById(1)).thenReturn(c);
-		
-		//List<Customer> clist = new ArrayList<Customer>();
-		//clist.add(c);
-		//when(customerRepository.getByCity("Cork")).thenReturn(clist);
-		
-		customerService = new CustomerServiceImpl(customerRepository);
-	}
-	
-	@Test
-	public void testGetCorkCustomers() {
-		assertEquals(1, customerService.findAll().size());
-	}
-
-	@Test
-	public void testGetById() {
-		String firstName = customerService.getCustomer(1).getFirstName();
-		String secondName = customerService.getCustomer(1).getSecondName();
-		assertTrue(firstName.equals("Tom") && secondName.equals("Hardy"));
-	}**/
-
 }

@@ -25,21 +25,33 @@ public class ProductController {
 		this.productService = productService;
 	}
 	
-	//returns a list of all products..
+	/**
+	 * returns a list of all products..
+	 * @param model
+	 * @return productList view
+	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)             
 	public String listProducts(Model model) {						  	
 		model.addAttribute("products", productService.findAll());	      
 		return "productList";	
 	}
 	
-	//display new product form
+	/**
+	 * display new product form
+	 * @param model
+	 * @return productForm view
+	 */
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String formProduct(Model model) {
 		model.addAttribute("product", new Product());
 		return "productForm";
 	}
 	
-	// saves a new product
+	/**
+	 * saves a new product
+	 * @param product
+	 * @return redirect to productList view.
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String save(@ModelAttribute Product product) {
 		productService.save(product);	

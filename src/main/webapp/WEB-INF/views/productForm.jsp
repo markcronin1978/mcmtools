@@ -36,5 +36,7 @@
 							</tr>
 						</table>
 					</form:form>
+					
+					<p>Igor i have added this link so that you can revert back to the <a href='<c:url value="/"/>'>the Content page</a></p>
 	
 	<jsp:include page="footer.jsp" />

@@ -18,7 +18,9 @@ public class ContentControllerTest {
 		model = new ExtendedModelMap();
 	}
 	
-	//test that the correct view is being returned from the method.
+	/**
+	 * test that the correct view is being returned from the method
+	 */
 	@Test
 	public void content() throws Exception{
 		String view = tested.content(model);

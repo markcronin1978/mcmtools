@@ -21,12 +21,16 @@ public class ProductServiceImpl implements ProductService{
 		this.productRepository = productRepository;
 	}
 	
-	//List all Products
+	/**
+	 * List all Products
+	 */
 	public List<Product> findAll(){
 		return productRepository.findAll();
 	}
 
-	//Save new product
+	/**
+	 * Save new product
+	 */
 	public void save(Product product) {
 		productRepository.save(product);		
 	}

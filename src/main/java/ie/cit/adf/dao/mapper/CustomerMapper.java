@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class CustomerMapper implements RowMapper<Customer> {
 
+	/**
+	 * here i am using RowMapper the retrieve and add customer information to the database
+	 */
 	public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Customer c = new Customer();
 		c.setId(rs.getString("id"));

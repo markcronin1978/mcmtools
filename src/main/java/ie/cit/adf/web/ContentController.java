@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ContentController {
-
-	@RequestMapping(value="/")    //this URL comes from the spring-infrastructure.xml file
+	
+	/**
+	 * this URL comes from the spring-infrastructure.xml file
+	 * @param model
+	 * @return content view
+	 */
+	@RequestMapping(value="/")   
 	public String content(Model model) {
 		return "content";
 	}

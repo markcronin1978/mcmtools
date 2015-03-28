@@ -27,15 +27,24 @@ public class SaleOrderController {
 		this.saleOrderService = saleOrderService;
 	}
 	
-	//Return a list of all products to the ProductOrderForm
+	/**
+	 * Return a list of all products to the ProductOrderForm
+	 * @param model
+	 * @return ProductOrderForm view
+	 */
 	@RequestMapping(value="/", method=RequestMethod.GET) 
 	public String listProduct(Model model){
 		model.addAttribute("productList", saleOrderService.findAll());
 		return "ProductOrderForm";                            
 	}
 	
-	/**Take the selected Product SKU and display the quantity jsp page..
-	 * Set the SaleOrder Product SKU**/
+	/**
+	 * Takes in the selected Product SKU
+	 * Sets the SaleOrder Product SKU
+	 * @param SKU
+	 * @param model
+	 * @return ProductOrderFormQuantity view
+	 */
 	@RequestMapping(value="/{SKU}", method = RequestMethod.GET)
 	public String selectedSKU(@PathVariable("SKU")int SKU, Model model){
 		model.addAttribute("productSelected", saleOrderService.getBySKU(SKU));
@@ -43,10 +52,15 @@ public class SaleOrderController {
 		return "ProductOrderFormQuantity";
 	}
 	
-	/**Quantity of selected item to purchase
+	/**
+	 * Quantity of selected item to purchase
 	 * with a two checks, one to verify that a quantity 
 	 * has being entered and the other to verify that it
-	 * does not exceed the stock level for that product**/	
+	 * does not exceed the stock level for that product	
+	 * @param quantity
+	 * @param model
+	 * @return possible of three views defined to on the result of the if statement
+	 */
 	@RequestMapping(value= "/quantity", method = RequestMethod.POST)
 	public String Quantity(@RequestParam("quantity")int quantity, Model model){
 		if(quantity==0){
@@ -67,8 +81,12 @@ public class SaleOrderController {
 		return "productOrderShippingDetails";
 		}
 	}
-	/**This method is used to take information from the customer
-	 * about the credit card details**/
+	/**
+	 * This method is used to take information from the customer
+	 * about the credit card details
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public String paymentDetails(Model model){
 		System.out.println("Hi all");

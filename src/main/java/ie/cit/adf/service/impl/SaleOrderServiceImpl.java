@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SaleOrderServiceImpl implements SaleOrderService {
-
 	
 	private ProductRepository producRepository;
 	private CustomerRepository customerRepository;
@@ -25,20 +24,31 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 		this.customerRepository = customerRepository;
 		this.producRepository = producRepository;
 	}
-	//list all products
+	
+	/**
+	 * list all products
+	 */
 	public List<Product> findAll(){
 		return producRepository.findAll();
 	}
 
-	//list product with specific sku number
+	/**
+	 * list product with specific sku number
+	 */
 	public Product getBySKU(int sku){
 		return producRepository.getBySKU(sku);
 	}
 
+	/**
+	 * search for customer by email address
+	 */
 	public Customer getByEmailAddress(String email) {
 		return customerRepository.getByEmailAddress(email);
 	}
 	
+	/**
+	 * search for quantity of product by product SKU number.
+	 */
 	public int getQuantityBySKU(int productSKU) {
 		return producRepository.getQuantityBySKU(productSKU);
 	}

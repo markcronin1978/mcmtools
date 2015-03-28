@@ -26,7 +26,11 @@ public class ProductControllerTest {
 		
 	}
 	
-	//test the correct view is being returned and the the product list coming into the method is not null
+	/**
+	 * test the correct view is being returned and the the 
+	 * product list coming into the method is not null
+	 * @throws Exception
+	 */
 	@Test
 	public void testListProducts() throws Exception{
 		String view = tested.listProducts(model);
@@ -35,7 +39,11 @@ public class ProductControllerTest {
 		verify(ps).findAll();
 	}
 	
-	//test that the correct view is being returned from the method.
+	/**
+	 * test that the correct view is being returned from the
+	 *  method.
+	 * @throws Exception
+	 */
 	@Test
 	public void testFormProduct() throws Exception{
 		String view = tested.formProduct(model);

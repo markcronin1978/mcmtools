@@ -22,7 +22,11 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 	
-	// Display Customer List
+	/**
+	 * Display Customer List
+	 * @param model
+	 * @return customerList view
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String listCustomers(Model model) {
 		model.addAttribute("customers", customerService.findAll());
@@ -30,14 +34,22 @@ public class CustomerController {
 		return "customerList";
 	}
 	
-	//display new Customer form
+	/**
+	 * display new Customer form
+	 * @param model
+	 * @return customerForm view
+	 */
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String formCustomer(Model model) {
 		model.addAttribute("customer", new Customer());
 		return "customerForm";
 	}
 	
-	// saves a new Customer
+	/**
+	 * saves a new Customer
+	 * @param customer
+	 * @return redirected view to customerList
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String addCustomer(@ModelAttribute Customer customer) {
 		System.out.println("CustomerContorller");

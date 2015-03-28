@@ -19,20 +19,24 @@ public class CustomerServiceImpl implements CustomerService{
 		this.customerRepository = customerRepository;
 	}
 
-	//list all customers and return in list
+	/**
+	 * list all customers and return in list
+	 */
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
 
-	//save a new customer
+	/**
+	 * save a new customer
+	 */
 	public void save(Customer customer) {
-		System.out.println("ServiceIMpl");
 		customerRepository.save(customer);		
 	}
 
-	//created for testing purposes
+	/**
+	 * created for testing purposes
+	 */
 	public Customer getById(String Id) {
-		System.out.println("ServiceIMpl");
 		return customerRepository.getById(Id);
 	}
 

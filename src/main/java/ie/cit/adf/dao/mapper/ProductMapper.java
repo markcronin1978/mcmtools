@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.RowMapper;
 public class ProductMapper implements RowMapper<Product> {
 
 	
-	//read product information from database 
+	/**
+	 * here i am using RowMapper the retrieve and add product information to the database
+	 */
 	public Product mapRow(ResultSet rs, int i) throws SQLException {
 		Product p = new Product();
 		p.setId(rs.getString("id"));

@@ -12,13 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface CustomerService {
 
-	//List all Customers
+	/**
+	 * List all Customers
+	 * @return list of customers
+	 */
 	List<Customer> findAll();
 	
-	//save Customer information
+	/**
+	 * save Customer information
+	 */
 	void save(Customer customer);
 	
-	//return customer byID
+	/**
+	 * List a customer by Customer ID number
+	 * @param Id
+	 * @return customer
+	 */
 	Customer getById(String Id);
 		
 }

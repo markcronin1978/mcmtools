@@ -13,16 +13,31 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface SaleOrderService {
 	
-	//list all products.
+	/**
+	 * list all products
+	 * @return a list of products
+	 */
 	List<Product> findAll();  
 
-	//list product with specific sku number
+	/**
+	 * get product by SKU number
+	 * @param sku
+	 * @return a specific product object
+	 */
 	Product getBySKU(int sku);
 
-	//get customer information by email address
+	/**
+	 * get customer by email address
+	 * @param email
+	 * @return a specific customer object
+	 */
 	Customer getByEmailAddress(String email);
 	
-	//get quantity of product by SKU number
+	/**
+	 * get quantity amount of a specific product using the product SKU number
+	 * @param productSKU
+	 * @return
+	 */
 	int getQuantityBySKU(int productSKU);
 	
 	

@@ -11,10 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface ProductService {
 
-	//List all Products
+	/**
+	 * List all Products
+	 * @return list of products
+	 */
 	List<Product> findAll();
 
-	//saves product 
+	/**
+	 * save product 
+	 * @param product
+	 */
 	void save(Product product);
 	
 

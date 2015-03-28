@@ -23,25 +23,29 @@ public class JdbcProductRepository implements ProductRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	//list all products and return information in a list
+	/**
+	 * query's database for a list of products
+	 */
 	public List<Product> findAll() {
 		String sql = "SELECT * FROM product";                        
 		return jdbcTemplate.query(sql, new ProductMapper());
 	}
 
-	//find a product by a SKU number and return an object
+	/**
+	 * query's database for a product by SKU number and returns
+	 * a product object
+	 */
 	public Product getBySKU(int SKU) {
 		String sql = "SELECT * From product WHERE sku = ?";		
 		return jdbcTemplate.queryForObject(sql, new ProductMapper(), SKU);  
 	}
 	
-	/*find a product by the ID number.
-	public Product getById(String Id){
-		String sql = "SELECT * From product WHERE Id = ?";
-		return jdbcTemplate.queryForObject(sql, new ProductMapper(), Id);
-	}*/
-
-	//checks to see if new or update product action is required
+	/**
+	 * checks to see if product being passed in is new of existing product 
+	 * that is being updated. Here i call the searchBySku function which
+	 * will either return null, if the product doesn't exist or the product
+	 * information if it does exist
+	 */
 	public void save(Product product) {
 		if (searchBySku(product.getSKU()) == null) {
 			System.out.println("SQL CHECK FOR EXISTING SKU");
@@ -51,7 +55,11 @@ public class JdbcProductRepository implements ProductRepository {
 		}
 	}
 	
-	//searches database to check for existing SKU number, if not present catches SQL Exception and returns null
+	/**
+	 * searches database to check for existing SKU number, if not present catches SQL Exception and returns null
+	 * @param SKU
+	 * @return null / product
+	 */
 	public Product searchBySku(int SKU) {
 		try {
 			String sql = "SELECT * FROM product WHERE sku = ?";
@@ -62,7 +70,10 @@ public class JdbcProductRepository implements ProductRepository {
 		return null;
 	}
 	
-	//insert new product information
+	/**
+	 * add new product information
+	 * @param product
+	 */
 	public void add(Product product) {
 		jdbcTemplate  
 				.update("INSERT INTO product (id, sku, name, description, priceperunit, stocklevel)"
@@ -72,7 +83,10 @@ public class JdbcProductRepository implements ProductRepository {
 
 	}
 
-	//update new product information
+	/**
+	 * update existing product information
+	 * @param product
+	 */
 	private void update(Product product) {
 		jdbcTemplate
 				.update("UPDATE product SET id= ?, name = ?, description = ?, priceperunit = ?, stocklevel = ?"
@@ -81,7 +95,9 @@ public class JdbcProductRepository implements ProductRepository {
 						product.getStockLevel(), product.getSKU());
 	}
 	
-	//return quantity of selected item for purchase.
+	/**
+	 * return quantity of selected item for purchase
+	 */
 	public int getQuantityBySKU(int productSKU) {
 		String sql = "SELECT * FROM product WHERE sku = ?";
 		Product quantity = jdbcTemplate.queryForObject(sql, new ProductMapper(),productSKU);

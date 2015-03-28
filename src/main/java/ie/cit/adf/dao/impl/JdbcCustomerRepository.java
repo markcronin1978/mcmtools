@@ -26,24 +26,34 @@ public class JdbcCustomerRepository implements CustomerRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
-	//list all customers.
+	/**
+	 * Query the database for a list of all customers
+	 */
 	public List<Customer> findAll() {
 		System.out.println("JDBC FIle");
 		String sql = "SELECT * FROM customer";
 		return jdbcTemplate.query(sql, new CustomerMapper());
 	}
 
-	//checks to see if new or update product action is required
+	/**
+	 * checks to see if customer being passed in is a 
+	 * new or existing customer that is being
+	 *  updated. Calls the customer searchByEmailm function
+	 *  and either returns null of customer information. 
+	 *  if null customer will be saved, else updated.
+	 */
 	public void save(Customer customer) {
 		if (searchByEmail(customer.getEmail()) == null) {
-			System.out.println("JDBC FIle");
 			add(customer);
 		} else {
 			update(customer);
 		}
 	}
 	
-	//searches database to check for existing Email address, if not present catches SQL Exception and returns null
+	/**
+	 * searches database to check for existing Email address, 
+	 * if not present catches SQL Exception and returns null
+	 */
 	public Customer searchByEmail(String email) {
 		try {
 			String sql = "SELECT * FROM customer WHERE email = ?";
@@ -54,7 +64,10 @@ public class JdbcCustomerRepository implements CustomerRepository {
 		return null;
 	}
 	
-	//insert new Customer information
+	/**
+	 * save new Customer information
+	 * @param customer
+	 */
 	public void add(Customer customer) {
 		jdbcTemplate  
 				.update("INSERT INTO customer (id, firstname, lastname, address1, address2, address3, email, password)"
@@ -64,7 +77,10 @@ public class JdbcCustomerRepository implements CustomerRepository {
 
 	}
 
-	//update new product information
+	/**
+	 * update new product information
+	 * @param customer
+	 */
 	private void update(Customer customer) {
 		jdbcTemplate
 				.update("UPDATE customer SET id= ?, firstname = ?, lastname = ?, address1 = ?, address2 = ?"
@@ -74,17 +90,25 @@ public class JdbcCustomerRepository implements CustomerRepository {
 						customer.getEmail());
 	}
 
-	//return customer by email address
+	/**
+	 * query's database for customer by email address
+	 */
 	public Customer getByEmailAddress(String email) {
 		String sql = "SELECT * FROM customer WHERE email = ?";
 		return jdbcTemplate.queryForObject(sql, new CustomerMapper(), email);
 	}
 
+	/**
+	 * query's database for customer by id
+	 */
 	public Customer getById(String id) {
 		String sql = "SELECT * FROM customer WHERE id = ?";
 		return jdbcTemplate.queryForObject(sql, new CustomerMapper(), id);
 	}
 
+	/**
+	 * query's database for customer by address3/city name
+	 */
 	public List<Customer> getByCity(String city) {
 		String sql = "SELECT * FROM customer WHERE address3 = ?";
 		return jdbcTemplate.query(sql, new CustomerMapper(), city);
