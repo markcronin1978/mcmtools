@@ -69,7 +69,7 @@ public class SaleOrderController {
 			model.addAttribute("Error_msg", Error_msg); 
 			return "ProductOrderFormQuantity";
 		}
-		else if(quantity >= saleOrderService.getQuantityBySKU(so.getProductSKU())){
+		else if(quantity > saleOrderService.getQuantityBySKU(so.getProductSKU())){
 			String Error_msg = "Not Enough Items in Stock for Order!!";
 			model.addAttribute("productSelected", saleOrderService.getBySKU(so.getProductSKU()));
 			model.addAttribute("Error_msg", Error_msg); 

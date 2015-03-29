@@ -45,7 +45,7 @@ public class CustomerServiceImplTest {
 		
 		/**
 		 * To verify that the customerRepository.findAll method is working,
-		 * I have added the above customer to an arraylist
+		 * I have added the above customer to an array list
 		 */
 		List<Customer> clist = new ArrayList<Customer>();
 		clist.add(c);
@@ -67,9 +67,10 @@ public class CustomerServiceImplTest {
 	}
 	/**
 	 * method to test getById function
+	 * @throws Exception
 	 */
 	@Test
-	public void testGetById(){
+	public void testGetById() throws Exception{
 		String id = "1L";
 		String firstName = tested.getById(id).getFirstName();
 		String secondName = tested.getById(id).getLastName();
@@ -79,18 +80,20 @@ public class CustomerServiceImplTest {
 	
 	/**
 	 * method to test listCustomers function
+	 * @throws Exception
 	 */
 	@Test
-	public void testListCustomers(){
+	public void testListCustomers() throws Exception{
 		assertThat(1,is(tested.findAll().size()));
 		verify(customerRepository).findAll();
 	}
 	
 	/**
-	 * method to test save customer function*
+	 * method to test save customer function
+	 * @throws Exception
 	 */
 	@Test
-	public void testSave(){			
+	public void testSave() throws Exception{			
 		Mockito.verify(customerRepository).save(Mockito.argThat(new ArgumentMatcher<Customer>(){
 			@Override
 			public boolean matches(Object argument){

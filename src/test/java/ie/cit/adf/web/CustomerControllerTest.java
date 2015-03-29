@@ -42,6 +42,9 @@ public class CustomerControllerTest {
 		customer.setEmail("tomhardy@yahoo.com");
 		customer.setPassword("hello123");
 		
+		/**
+		 * I am declaring that when the addCustomer function is called, the mock customer will be save. 
+		 */
 		tested.addCustomer(customer);
 		
 	}	

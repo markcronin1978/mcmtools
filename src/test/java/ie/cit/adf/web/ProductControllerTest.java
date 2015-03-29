@@ -4,25 +4,45 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import ie.cit.adf.domain.Customer;
+import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.ProductService;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
+import org.mockito.Mockito;
 import org.springframework.ui.ExtendedModelMap;
 
 public class ProductControllerTest {
 
-	private ProductService ps;
+	private ProductService productService;
 	private ProductController tested;
 	private ExtendedModelMap model;
 	
 	
 	@Before
 	public void setup(){
-		ps = mock(ProductService.class);
-		tested = new ProductController(ps);
+		productService = mock(ProductService.class);
+		tested = new ProductController(productService);
 		model = new ExtendedModelMap();
+		
+		/**
+		 * I am creating a mock product to use for testing functions
+		 */
+		Product p = new Product();
+		p.setId("1L");
+		p.setSKU(123);
+		p.setName("Trition");
+		p.setDescription("Air Saw");
+		p.setPricePerUnit(25.00);
+		p.setStockLevel(25);
+		
+		/**
+		 * I am declaring that when the save function is called, the mock product will be save. 
+		 */
+		tested.save(p);
 		
 	}
 	
@@ -36,7 +56,7 @@ public class ProductControllerTest {
 		String view = tested.listProducts(model);
 		assertThat(view, CoreMatchers.equalTo("productList"));
 		assertThat(model.get("products"), notNullValue());
-		verify(ps).findAll();
+		verify(productService).findAll();
 	}
 	
 	/**
@@ -50,4 +70,17 @@ public class ProductControllerTest {
 		assertThat(view, CoreMatchers.equalTo("productForm"));
 	}
 	
+	/**
+	 * test the method to save a new product. 	
+	 */
+	@Test
+	public void testSave(){
+		
+		Mockito.verify(productService).save(Mockito.argThat(new ArgumentMatcher<Product>(){
+			@Override
+			public boolean matches(Object argument){
+				return ((Product) argument).getName().equals("Trition");
+			}
+		}));
+	}
 }

@@ -9,8 +9,10 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.cit.adf.domain.Customer;
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.SaleOrderService;
+
 
 
 import org.hamcrest.CoreMatchers;
@@ -32,6 +34,10 @@ public class SaleOrderControllerTest {
 		tested = new SaleOrderController(ss);
 		model = new ExtendedModelMap();
 				
+		/**
+		 * This is a mock product so that function that are contained with the SaleOrderController can
+		 * be tested
+		 */
 		Product p = new Product();
 		p.setId("1L");
 		p.setSKU(123);
@@ -40,24 +46,69 @@ public class SaleOrderControllerTest {
 		p.setPricePerUnit(25.00);
 		p.setStockLevel(25);
 		
+		/**
+		 * Adding above mock Product to an ArrayList.
+		 */
 		List<Product> pList = new ArrayList<Product>();
 		pList.add(p);
 		
+		/**
+		 * Mock Customer required to test quantity method within SaleOrderController
+		 */
+		Customer c = new Customer();
+		c.setId("1L");
+		c.setAddress1("The Street");
+		c.setAddress2("The Neighbourhood");
+		c.setAddress3("Cork");
+		c.setFirstName("Tom");
+		c.setLastName("Hardy");
+		c.setEmail("tomhardy@gmail.com");
+		c.setPassword("password");
+		
+		/**
+		 * This is setup to verify that the ListProduct Method is returning a array list
+		 * which contains the product created above.
+		 */
 		when(ss.findAll()).thenReturn(pList);
+		
+		/**
+		 * This is setup so that when the function SaleOrderService.getBySKU is called 
+		 * it will return the product created above
+		 */
 		when(ss.getBySKU(123)).thenReturn(p);
-		when(ss.getQuantityBySKU(123)).thenReturn(25);
+		
+		/**
+		 * This is setup to create a instance of a SaleOrder so that the quantity check in
+		 * the Quantity method can be tested effectively
+		 */
+		tested.so.setProductSKU(123);
 			
+		/**
+		 * Here i am saying that when the saleOrderServices called the getByEmailAddress function, then
+		 * return the mock customer above. 
+		 */
+		when(ss.getByEmailAddress("markcronin120@gmail.com")).thenReturn(c);
 	}	
 
-	//test method that returns a list of available products.
+	/**
+	 * test method to check the the Array list being returned to the method is not empty
+	 * and that the correct view is being called.
+	 * @throws Exception
+	 */
 	@Test
-	public void testListProduct() {
+	public void testListProduct() throws Exception{
 		String view = tested.listProduct(model);
 		assertThat(view, CoreMatchers.equalTo("ProductOrderForm"));
 		assertThat(model.get("productList"), notNullValue());
 		verify(ss).findAll();
 	}
 	
+	/**
+	 * This test is to verify that when the SaleOrderController calls the getBySKU function
+	 * which i have declared in the Setup method that the correct view is returned
+	 * and that the productSelected object is not null.
+	 * @throws Exception
+	 */
 	@Test
 	public void testSelectedSKU() throws Exception{
 		String view = tested.selectedSKU(123, model);
@@ -67,49 +118,53 @@ public class SaleOrderControllerTest {
 		
 	}
 	
-	//test the correct view is being returned and i have passed a quantity value of 0
+	/**
+	 * This is the first of three tests to check the Quantity method in the SaleOrderController.
+	 * In the Setup Method i declared a mock sale order (so) and set the Product SKU to the mock Product SKU number above (123)
+	 * In this test method i am sending back a quantity of 0, so i am checking that the first if statement, If(quantity == 0)
+	 * the resulting should be, the ProductOrderFormQuantity is returned, with the ProductSelected Object and that
+	 * an error message is also returned.  
+	 * @throws Exception
+	 */
 	@Test
-	public void testQuantity() throws Exception{
-		//int quantity = 0;
-		String view = tested.Quantity(25, model);
-		assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
-		//assertThat(model.get("productSelected"), notNullValue());
-		verify(ss).getQuantityBySKU(0);
-
-		/**String view = tested.Quantity(quantity , model);
-		when(ss.getQuantityBySKU(123)).thenReturn(0);
-		//when(ss.getQuantityBySKU(321)).thenReturn(10000);
-		//when(ss.getQuantityBySKU(333)).thenReturn(55);
-		//assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
-		if(ss.getQuantityBySKU(123)==0){
-			assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));			
-		}
-		else if(ss.getQuantityBySKU(321)==500){
-			assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));			
-		}
-		else{
-			assertThat(view, CoreMatchers.equalTo("productOrderShippingDetails"));	
-		} **/
-		
-		
-		
-		/**int quantity = 0;
-		String view = tested.Quantity(quantity, model);
-		if(quantity==0){
-			assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
-			assertThat(model.get(1000), nullValue());	
-		}
-		else if(quantity==10000){
-			assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
-			assertThat(model.get(1000), nullValue());
-		}
-		else if(quantity==5){
-			assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
-			assertThat(model.get(1000), nullValue());
-		}**/
-		
+    public void testQuantity() throws Exception{
+		String view = tested.Quantity(0, model);
+        assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity")); 
+        assertThat(model.get("productSelected"), notNullValue());
+        assertThat(model.get("Error_msg"), notNullValue()); 
+        verify(ss).getBySKU(123);
+    }
+   
+	/**
+	 * This is the second check within the quantity method in the SaleOrderController. Here i am checking that quantity
+	 * entered is not exceeding the quantity available for that product item. This time i mocked that the quantity of 
+	 * product SKU 123 is 400, and that the customer requires a quantity of 401. So i am checking that the 
+	 * ProductOrderFormQuantity view is being returned along with an error message and that the productSelected Object
+	 * is not null. 
+	 * @throws Exception
+	 */
+    @Test
+    public void testQuantity1() throws Exception{
+    	when(ss.getQuantityBySKU(123)).thenReturn(400);
+        String view = tested.Quantity(401, model);
+        assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
+        assertThat(model.get("productSelected"), notNullValue());
+        assertThat(model.get("Error_msg"), notNullValue()); 
+        verify(ss).getQuantityBySKU(123);
+    }
+   
+    /**
+     * This is the final check of the quantity method within the SaleOrderController, Here i have mocked that the quantity
+     * of the mock product SKU 123 is 12 and that the customer requires 9, so the Quantity check should pass and 
+     * return the ProductOrderShippingDetails, and that the customer Object is not null. 
+     * @throws Exception
+     */
+    @Test
+    public void testQuantity2() throws Exception{
+    	when(ss.getQuantityBySKU(123)).thenReturn(12);
+        String view = tested.Quantity(9, model);
+        assertThat(view, CoreMatchers.equalTo("productOrderShippingDetails"));
+        assertThat(model.get("customer"), notNullValue());
+        verify(ss).getQuantityBySKU(123);    
 	}
-
-	
-
 }
