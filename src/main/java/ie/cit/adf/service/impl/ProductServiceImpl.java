@@ -34,5 +34,12 @@ public class ProductServiceImpl implements ProductService{
 	public void save(Product product) {
 		productRepository.save(product);		
 	}
+
+	/**
+	 * Return product object by SKU Number
+	 */
+	public Product getBySKU(int SKU) {
+		return productRepository.getBySKU(SKU);
+	}
 	
 }

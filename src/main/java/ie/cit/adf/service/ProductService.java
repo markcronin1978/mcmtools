@@ -23,5 +23,11 @@ public interface ProductService {
 	 */
 	void save(Product product);
 	
+	/**
+	 * Return product by SKU number
+	 * @param SKU
+	 * @return
+	 */
+	Product getBySKU(int SKU);
 
 }

@@ -48,7 +48,6 @@ public class JdbcProductRepository implements ProductRepository {
 	 */
 	public void save(Product product) {
 		if (searchBySku(product.getSKU()) == null) {
-			System.out.println("SQL CHECK FOR EXISTING SKU");
 			add(product);
 		} else {
 			update(product);

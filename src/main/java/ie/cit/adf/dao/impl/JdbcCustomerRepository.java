@@ -83,11 +83,11 @@ public class JdbcCustomerRepository implements CustomerRepository {
 	 */
 	private void update(Customer customer) {
 		jdbcTemplate
-				.update("UPDATE customer SET id= ?, firstname = ?, lastname = ?, address1 = ?, address2 = ?"
+				.update("UPDATE customer SET firstname = ?, lastname = ?, address1 = ?, address2 = ?, "
 						+ "address3 = ?, email = ?, password = ?"
-						+ " WHERE email = ?", customer.getId(), customer.getFirstName(), customer.getLastName(),
-						customer.getAddress1(), customer.getAddress2(), customer.getAddress3(), customer.getPassword(), 
-						customer.getEmail());
+						+ " WHERE id = ?", customer.getFirstName(), customer.getLastName(),
+						customer.getAddress1(), customer.getAddress2(), customer.getAddress3(), customer.getEmail(), customer.getPassword(), 
+						customer.getId());
 	}
 
 	/**

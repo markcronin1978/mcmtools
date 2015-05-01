@@ -10,7 +10,7 @@
   
 <!-- properties is used so that we can change the revision in one go -->
   	<properties>
-		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
   
   <dependencies>
@@ -27,7 +27,14 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 	</dependency>
-  	<!--  -->
+    <dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-test</artifactId>
+  		<version>${spring.version}</version>
+  		<scope>test</scope>		
+  	</dependency>
+	
+  	<!-- basic spring configuration files-->
   	<dependency>
 		<groupId>log4j</groupId>
   		<artifactId>log4j</artifactId>
@@ -53,11 +60,15 @@
 		<artifactId>spring-webmvc</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
+	
+	<!-- Database driver -->
 	<dependency>
 		<groupId>postgresql</groupId>
 	 	<artifactId>postgresql</artifactId>
 		<version>9.1-901-1.jdbc4</version>
 	</dependency>
+	
+	<!-- Web front configuration file -->
   	<dependency>
   		<groupId>javax.servlet</groupId>
   		<artifactId>servlet-api</artifactId>
@@ -69,5 +80,12 @@
   		<artifactId>jstl</artifactId>
  		<version>1.2</version>
   	</dependency>  
+  	
+  	<!-- Transactional manager -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${spring.version}</version>
+	</dependency>
   </dependencies>
 </project>
