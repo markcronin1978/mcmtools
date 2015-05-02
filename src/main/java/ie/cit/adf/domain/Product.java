@@ -2,6 +2,8 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
+
+
 public class Product {
 	
 	private String id;

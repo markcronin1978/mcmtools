@@ -4,6 +4,8 @@
 
 
 	<jsp:include page="header.jsp" />    <!-- I am including the Header.jsp page -->
+	
+		<jsp:include page="linkDisplay.jsp" />
 			
 			<p>Add Customer</p>
 				<c:url value="/customer/" var="form_url"/>    
@@ -31,7 +33,7 @@
 							</tr>
 							<tr>
 								<td>Email Address</td>
-								<td><form:input path="email" size="50" /></td>								
+								<td><form:input path="email" size="50" /></td>							
 							</tr>
 							<tr>
 								<td>Password</td>

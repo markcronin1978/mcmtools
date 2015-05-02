@@ -1,6 +1,6 @@
 package ie.cit.adf.service.IntegrationTest;
 
-import ie.cit.adf.domain.Customer;
+
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.ProductService;
 

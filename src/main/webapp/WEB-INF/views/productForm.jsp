@@ -4,6 +4,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 	<jsp:include page="header.jsp" />
+	
+		<jsp:include page="linkDisplay.jsp" />
                             
 			
 			<p>Add Product</p>

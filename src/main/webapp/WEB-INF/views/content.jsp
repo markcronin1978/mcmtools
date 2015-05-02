@@ -7,7 +7,7 @@
 
 	<p>Welcome to MCMTools LTD. We are currrently the largest supplier of Motorsport tools and equipment.</p>
 	<p>We can supply all tools and equipment required for car restoration and maintenance.</p>
-	<p>If you are a existing Customer than <a href='<c:url value="/saleorderController/"/>'>Login</a> here</p>
+	<p>If you are a existing Customer than <a href='<c:url value="/login"/>'>Login</a> here</p>
 	</br>
 	</br>
 	<p>Hi Igor, what i have done so far is as followings:</p>

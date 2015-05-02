@@ -35,7 +35,6 @@ public class CustomerServiceImplTest {
 		c.setFirstName("Tom");
 		c.setLastName("Hardy");
 		c.setEmail("tomhardy@gmail.com");
-		c.setPassword("password");
 		
 		/**
 		 * what i am basically doing here is that when the customerRepository.getById 

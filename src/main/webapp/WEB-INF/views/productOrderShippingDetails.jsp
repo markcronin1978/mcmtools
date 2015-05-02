@@ -5,6 +5,7 @@
 
 	<jsp:include page="header.jsp" />				
 
+		<jsp:include page="linkDisplay.jsp" />
 			
 					<p>Please Verify Name And Shipping Address</p>
 					
@@ -29,7 +30,6 @@
 								<tr>				 		
 									<form:hidden path="id" />
 									<form:hidden path="email" />
-									<form:hidden path="password" />
 									<input type="submit" value="Save" />
 								</tr>
 							</table>

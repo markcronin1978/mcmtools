@@ -7,8 +7,10 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import ie.cit.adf.dao.CreditCardRepository;
 import ie.cit.adf.dao.CustomerRepository;
 import ie.cit.adf.dao.ProductRepository;
+import ie.cit.adf.dao.SaleOrderRepository;
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.SaleOrderService;
@@ -22,13 +24,17 @@ public class SaleOrderServiceImplTest {
 	private SaleOrderService tested;
 	private CustomerRepository customerRepository;
 	private ProductRepository productRepository;
+	private SaleOrderRepository saleOrderRepository;
+	private CreditCardRepository creditCardRepository;
 	
 
 	@Before
 	public void setup(){
 		customerRepository = mock(CustomerRepository.class);
 		productRepository = mock(ProductRepository.class);
-		tested = new SaleOrderServiceImpl(productRepository, customerRepository);
+		saleOrderRepository = mock(SaleOrderRepository.class);
+		creditCardRepository = mock(CreditCardRepository.class);
+		tested = new SaleOrderServiceImpl(productRepository, customerRepository, saleOrderRepository, creditCardRepository);
 		
 		/**
 		 * In the setup function i am creating both a mock product and
@@ -64,7 +70,6 @@ public class SaleOrderServiceImplTest {
 		c.setFirstName("Tom");
 		c.setLastName("Hardy");
 		c.setEmail("tomhardy@gmail.com");
-		c.setPassword("password");
 		
 		/**
 		 * creating a mock parameter for testing the getbyEmailAddress

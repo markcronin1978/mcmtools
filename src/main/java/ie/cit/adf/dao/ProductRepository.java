@@ -32,4 +32,6 @@ public interface ProductRepository {
 	 * @return a product object
 	 */
 	int getQuantityBySKU(int productSKU);
+
+
 }

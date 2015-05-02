@@ -5,7 +5,7 @@ import java.util.UUID;
 public class SaleOrder {
 
 	private String id;
-	private int customerId;
+	private String customerEmail;
 	private int productSKU;
 	private int quantity;
 	private double cost;	
@@ -14,10 +14,10 @@ public class SaleOrder {
 		this.id = UUID.randomUUID().toString();
 	}
 	
-	public SaleOrder(String id, int customerId, int productSKU, int quantity) {
+	public SaleOrder(String id, String customerEmail, int productSKU, int quantity) {
 		super();
 		this.id = UUID.randomUUID().toString();
-		this.customerId = customerId;
+		this.customerEmail = customerEmail;
 		this.productSKU = productSKU;
 		this.quantity = quantity;
 	}
@@ -30,12 +30,12 @@ public class SaleOrder {
 		this.id = id;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public String getCustomerEmail() {
+		return customerEmail;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
 	public int getProductSKU() {
@@ -64,13 +64,10 @@ public class SaleOrder {
 
 	@Override
 	public String toString() {
-		return "SaleOrder [id=" + id + ", customerId=" + customerId
+		return "SaleOrder [id=" + id + ", customerEmail=" + customerEmail
 				+ ", productSKU=" + productSKU + ", quantity=" + quantity
 				+ ", cost=" + cost + "]";
 	}
 
-	
-	
-	
 	
 }

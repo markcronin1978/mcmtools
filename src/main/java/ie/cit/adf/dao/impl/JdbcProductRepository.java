@@ -104,4 +104,12 @@ public class JdbcProductRepository implements ProductRepository {
 		
 	}
 
+	/**
+	 * return a list of previously purchased products.
+	 */
+	public List<Product> purchaseHist(String name) {
+		String sql = "SELECT * From product WHERE email = ?";	
+		return jdbcTemplate.query(sql, new ProductMapper(), name);
+	}
+
 }

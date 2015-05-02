@@ -15,9 +15,13 @@ import ie.cit.adf.service.SaleOrderService;
 
 
 
+
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.remoting.soap.SoapFaultException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ExtendedModelMap;
 
 
@@ -26,6 +30,7 @@ public class SaleOrderControllerTest {
 	private SaleOrderService ss;
 	private SaleOrderController tested;
 	private ExtendedModelMap model;
+	private Customer c;
 	
 	
 	@Before
@@ -87,7 +92,14 @@ public class SaleOrderControllerTest {
 		 * Here i am saying that when the saleOrderServices called the getByEmailAddress function, then
 		 * return the mock customer above. 
 		 */
-		when(ss.getByEmailAddress("markcronin120@gmail.com")).thenReturn(c);
+		ss.getByEmailAddress("tomhardy@gmail.com");
+		
+		tested.so.setCustomerEmail("tomhardy@gmail.com");
+		
+		//when(SecurityContextHolder.getContext().getAuthentication().getName()).thenReturn("tomhardy@gmail.com");
+		
+		
+		
 	}	
 
 	/**
@@ -114,6 +126,7 @@ public class SaleOrderControllerTest {
 		String view = tested.selectedSKU(123, model);
 		assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
 		assertThat(model.get("productSelected"), notNullValue());
+		assertThat(tested.so.getCustomerEmail(), notNullValue());
 		verify(ss).getBySKU(123);
 		
 	}
@@ -162,6 +175,7 @@ public class SaleOrderControllerTest {
     @Test
     public void testQuantity2() throws Exception{
     	when(ss.getQuantityBySKU(123)).thenReturn(12);
+    	when(ss.getByEmailAddress("tomhardy@gmail.com")).thenReturn(c);
         String view = tested.Quantity(9, model);
         assertThat(view, CoreMatchers.equalTo("productOrderShippingDetails"));
         assertThat(model.get("customer"), notNullValue());

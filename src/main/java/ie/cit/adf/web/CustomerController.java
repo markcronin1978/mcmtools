@@ -1,11 +1,15 @@
 package ie.cit.adf.web;
 
 
+
+
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.service.CustomerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,10 +56,9 @@ public class CustomerController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String addCustomer(@ModelAttribute Customer customer) {
-		System.out.println("CustomerContorller");
 		customerService.save(customer);	
-		System.out.println("CustomerContorller1");
 		return "redirect:/customer/";
+				
 	}
 
 }

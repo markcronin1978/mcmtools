@@ -2,6 +2,8 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
+
+
 public class Customer {
 
 	private String id;
@@ -18,8 +20,7 @@ public class Customer {
 	}
 
 	public Customer(String id, String firstName, String lastName,
-			String address1, String address2, String address3, String email,
-			String password) {
+			String address1, String address2, String address3, String email, String password) {
 		super();
 		this.id = UUID.randomUUID().toString();
 		this.firstName = firstName;
@@ -86,13 +87,13 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getPassword() {
+	
+	public String getPassword(){
 		return password;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	
+	public void setPassword(String password){
+		this.password =password;
 	}
 
 	@Override
@@ -102,9 +103,5 @@ public class Customer {
 				+ ", address2=" + address2 + ", address3=" + address3
 				+ ", email=" + email + ", password=" + password + "]";
 	}
-	
-	
-	
-	
 
 }

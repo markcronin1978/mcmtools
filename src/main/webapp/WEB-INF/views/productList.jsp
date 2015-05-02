@@ -4,7 +4,8 @@
 
 	<jsp:include page="header.jsp" />
 				
-
+		<jsp:include page="linkDisplay.jsp" />
+		
 			<h2>Product List:</h2>
 
 					<table align="center">

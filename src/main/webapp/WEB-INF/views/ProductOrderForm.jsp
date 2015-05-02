@@ -3,10 +3,12 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
+
 	<jsp:include page="header.jsp" />
-				
-				<h3>Product List:</h3>
-																
+
+		<jsp:include page="linkDisplay.jsp" />
+		
+				<h3>Product List:</h3>																
 					<table cellpadding='10' align="center">	
 						<tr>					
 							<td>Stock Keeping Unit</td><td>Name</td><td>Description</td><td>Price Per Unit</td><td>Select Item</td>

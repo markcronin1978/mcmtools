@@ -5,6 +5,8 @@
 
 
 	<jsp:include page="header.jsp" />
+	
+		<jsp:include page="linkDisplay.jsp" />
 				
 			<p style="color:red"><c:out value="${Error_msg}" /></p>
 				<h3>Item Selected For Purchase</h3>

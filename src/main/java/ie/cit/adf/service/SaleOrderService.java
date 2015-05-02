@@ -1,8 +1,13 @@
 package ie.cit.adf.service;
 
 
+import ie.cit.adf.domain.CreditCard;
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.domain.Product;
+
+
+
+import ie.cit.adf.domain.SaleOrder;
 
 import java.util.List;
 
@@ -40,6 +45,19 @@ public interface SaleOrderService {
 	 */
 	int getQuantityBySKU(int productSKU);
 	
+	/**
+	 * return credit card information for purchase
+	 * @param email
+	 * @return
+	 */
+	CreditCard getbyEmailAddress(String email);
+
 	
+	void save(CreditCard creditCard);
 	
+	void save(Product product);
+	
+	void save(SaleOrder saleOrder);
+	
+		
 }

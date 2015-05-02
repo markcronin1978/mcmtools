@@ -74,6 +74,8 @@ public class JdbcCustomerRepository implements CustomerRepository {
 						+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)", customer.getId(), 
 						customer.getFirstName(), customer.getLastName(), customer.getAddress1(), 
 						customer.getAddress2(), customer.getAddress3(), customer.getEmail(), customer.getPassword());
+		jdbcTemplate.update("INSERT INTO users (username, password, enabled)" + "VALUES (?, ?, ?)", customer.getEmail(), customer.getPassword(), true);
+		jdbcTemplate.update("INSERT INTO authorities (username, authority)" + "VALUES (?, ?)", customer.getEmail(), "ROLE_USER");
 
 	}
 
@@ -86,8 +88,8 @@ public class JdbcCustomerRepository implements CustomerRepository {
 				.update("UPDATE customer SET firstname = ?, lastname = ?, address1 = ?, address2 = ?, "
 						+ "address3 = ?, email = ?, password = ?"
 						+ " WHERE id = ?", customer.getFirstName(), customer.getLastName(),
-						customer.getAddress1(), customer.getAddress2(), customer.getAddress3(), customer.getEmail(), customer.getPassword(), 
-						customer.getId());
+						customer.getAddress1(), customer.getAddress2(), customer.getAddress3(), customer.getEmail(), 
+						customer.getPassword(), customer.getId());
 	}
 
 	/**
