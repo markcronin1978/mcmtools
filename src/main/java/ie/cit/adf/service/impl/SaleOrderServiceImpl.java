@@ -65,9 +65,9 @@ public class SaleOrderServiceImpl implements SaleOrderService {
 	/**
 	 * return a list of previously purchased products
 	 */
-	public List<SaleOrder> purchaseHist(String name) {
-		return saleOrderRepository.purchaseHist(name);
-	}
+	//public List<SaleOrder> purchaseHist(String name) {
+	//	return saleOrderRepository.purchaseHist(name);
+	//}
 
 	public CreditCard getbyEmailAddress(String email) {
 		return creditCardRepository.getbyEmailAddress(email);

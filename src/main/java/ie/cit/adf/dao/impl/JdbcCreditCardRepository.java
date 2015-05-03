@@ -39,11 +39,7 @@ public class JdbcCreditCardRepository implements CreditCardRepository {
 			update(creditCard);
 		}
 	}
-	
-	/**
-	 * searches database to check for existing Email address, 
-	 * if not present catches SQL Exception and returns null
-	 */
+
 	public CreditCard searchByEmail(String email) {
 		try {
 			String sql = "SELECT * FROM creditCard WHERE email = ?";

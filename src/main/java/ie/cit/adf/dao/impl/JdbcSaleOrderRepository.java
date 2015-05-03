@@ -9,9 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import ie.cit.adf.dao.SaleOrderRepository;
-import ie.cit.adf.dao.mapper.ProductMapper;
 import ie.cit.adf.dao.mapper.SaleOrderMapper;
-import ie.cit.adf.domain.Product;
 import ie.cit.adf.domain.SaleOrder;
 
 @Repository
@@ -28,11 +26,11 @@ public class JdbcSaleOrderRepository implements SaleOrderRepository {
 	/**
 	 * return a list of previously purchased products.
 	 */
-	public List<SaleOrder> purchaseHist(String name) {
+/**	public List<SaleOrder> purchaseHist(String name) {
 		String sql = "SELECT * From product WHERE email = ?";	
 		return jdbcTemplate.query(sql, new SaleOrderMapper(), name);
 
-	}
+	} **/
 
 	public void save(SaleOrder saleOrder) {
 		jdbcTemplate
@@ -41,6 +39,11 @@ public class JdbcSaleOrderRepository implements SaleOrderRepository {
 							saleOrder.getCustomerEmail(), saleOrder.getProductSKU(), saleOrder.getQuantity(), 
 							saleOrder.getCost());
 		}
+
+	public List<SaleOrder> findAll() {
+		String sql = "SELECT * From saleorder";
+		return jdbcTemplate.query(sql, new SaleOrderMapper());
+	}
 		
 }	
 

@@ -1,11 +1,16 @@
 package ie.cit.adf.web;
 
+
+
+import javax.servlet.http.HttpServletRequest;
+
 import ie.cit.adf.domain.CreditCard;
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.domain.SaleOrder;
 import ie.cit.adf.service.SaleOrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +26,6 @@ public class SaleOrderController {
 	
 	SaleOrder so = new SaleOrder();		
 	Product P;
-	//CreditCard creditCard = new CreditCard();
 	
 										  
 	private SaleOrderService saleOrderService;
@@ -31,6 +35,11 @@ public class SaleOrderController {
 		this.saleOrderService = saleOrderService;
 	}
 	
+   /* @RequestMapping(value = "/username", method = RequestMethod.GET)
+    public void currentUserName(Principal principal) {
+    	so.setCustomerEmail(principal.getName());
+        //return principal.getName();
+    }*/
 	
 	/**
 	 * Return a list of all products to the ProductOrderForm
@@ -40,6 +49,7 @@ public class SaleOrderController {
 	@RequestMapping(value="/", method=RequestMethod.GET) 
 	public String listProduct(Model model){
 		model.addAttribute("productList", saleOrderService.findAll());
+		so.setCustomerEmail(SecurityContextHolder.getContext().getAuthentication().getName());
 		return "ProductOrderForm";                            
 	}
 	
@@ -53,8 +63,7 @@ public class SaleOrderController {
 	@RequestMapping(value="/{SKU}", method = RequestMethod.GET)
 	public String selectedSKU(@PathVariable("SKU")int SKU, Model model){
 		model.addAttribute("productSelected", saleOrderService.getBySKU(SKU));		
-		so.setProductSKU(SKU);
-		so.setCustomerEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+		so.setProductSKU(SKU);		
 		return "ProductOrderFormQuantity";
 	}
 	

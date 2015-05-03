@@ -9,9 +9,15 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.SaleOrderService;
+
+
+
+
 
 
 
@@ -21,6 +27,9 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.remoting.soap.SoapFaultException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ExtendedModelMap;
 
@@ -30,14 +39,16 @@ public class SaleOrderControllerTest {
 	private SaleOrderService ss;
 	private SaleOrderController tested;
 	private ExtendedModelMap model;
-	private Customer c;
+	//private Authentication auth;
 	
 	
 	@Before
 	public void setup(){
 		ss = mock(SaleOrderService.class);
+		//auth = SecurityContextHolder.getContext().getAuthentication();
 		tested = new SaleOrderController(ss);
 		model = new ExtendedModelMap();
+		
 				
 		/**
 		 * This is a mock product so that function that are contained with the SaleOrderController can
@@ -96,10 +107,16 @@ public class SaleOrderControllerTest {
 		
 		tested.so.setCustomerEmail("tomhardy@gmail.com");
 		
-		//when(SecurityContextHolder.getContext().getAuthentication().getName()).thenReturn("tomhardy@gmail.com");
+		when(ss.getByEmailAddress("tomhardy@gmail.com")).thenReturn(c);
 		
-		
-		
+		/**
+		 * As the application is now running spring I have to create a user with the correct
+		 * security privileges. This is called in the testListProduct test method.
+		 */
+		Authentication auth = new UsernamePasswordAuthenticationToken("tomhardy@gmail.com", "password");
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		securityContext.setAuthentication(auth);
+
 	}	
 
 	/**
@@ -124,9 +141,10 @@ public class SaleOrderControllerTest {
 	@Test
 	public void testSelectedSKU() throws Exception{
 		String view = tested.selectedSKU(123, model);
+		
 		assertThat(view, CoreMatchers.equalTo("ProductOrderFormQuantity"));
 		assertThat(model.get("productSelected"), notNullValue());
-		assertThat(tested.so.getCustomerEmail(), notNullValue());
+		
 		verify(ss).getBySKU(123);
 		
 	}
@@ -175,10 +193,10 @@ public class SaleOrderControllerTest {
     @Test
     public void testQuantity2() throws Exception{
     	when(ss.getQuantityBySKU(123)).thenReturn(12);
-    	when(ss.getByEmailAddress("tomhardy@gmail.com")).thenReturn(c);
         String view = tested.Quantity(9, model);
-        assertThat(view, CoreMatchers.equalTo("productOrderShippingDetails"));
         assertThat(model.get("customer"), notNullValue());
+        assertThat(view, CoreMatchers.equalTo("productOrderShippingDetails"));
+        
         verify(ss).getQuantityBySKU(123);    
 	}
 }

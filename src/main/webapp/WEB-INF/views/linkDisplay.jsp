@@ -12,7 +12,7 @@
 				<a href='<c:url value="/customer/add"/>'> Add Customer |</a>
 				<a href='<c:url value="/product/"/>'> Product List  |</a>				
 				<a href='<c:url value="/product/add"/>'> Add Product |</a>			
-				<a href='<c:url value="/adminController/"/>'> Order List |</a>
+				<a href='<c:url value="/adminController/"/>'> Purchase History |</a>
 			
 		</sec:authorize>
 		

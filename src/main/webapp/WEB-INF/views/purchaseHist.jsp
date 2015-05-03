@@ -9,12 +9,12 @@
 		<h2>Sales Order List:</h2>
 			<table cellpadding='10' align="center">
 				<tr>
-					<td> ID </td><td> Product ID </td><td>Quantity</td><td> cost </td>
+					<td> Customer Email </td><td> Product ID </td><td>Quantity</td><td> cost </td>
 				</tr>
 		
 				<c:forEach var="ph" items="${purchaseHist}">
 					<tr>
-						<td>${ph.id}</td><td>${ph.productSku}</td><td>${ph.quantity}</td><td>${ph.cost}</td>
+						<td>${ph.customerEmail}</td><td>${ph.productSKU}</td><td>${ph.quantity}</td><td>${ph.cost}</td>
 					</tr>
 					</c:forEach>
 			</table>
