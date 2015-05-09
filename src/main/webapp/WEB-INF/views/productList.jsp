@@ -1,11 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
 	<jsp:include page="header.jsp" />
 				
 		<jsp:include page="linkDisplay.jsp" />
 		
+			<p style="color:black"><c:out value="${message}" /></p>
+			
 			<h2>Product List:</h2>
 
 					<table align="center">

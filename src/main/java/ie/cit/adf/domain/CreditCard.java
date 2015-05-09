@@ -3,16 +3,29 @@ package ie.cit.adf.domain;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 
 public class CreditCard {
+	
+	
 	private String id;
+	@NotEmpty
 	private String name;
+	@NotNull 
 	private BigDecimal number; 
+	@NotEmpty
 	private String email;
+	@NotNull
 	private int expMonth;
+	@NotNull
 	private int expYear;
+	@NotNull
 	private int securityCode;
+	@NotNull
 	private String cardType;
 
 	public CreditCard(){

@@ -52,11 +52,22 @@ public interface SaleOrderService {
 	 */
 	CreditCard getbyEmailAddress(String email);
 
-	
+	/**
+	 * Save CreditCard information	
+	 * @param creditCard
+	 */
 	void save(CreditCard creditCard);
 	
+	/**
+	 * Save Product Information
+	 * @param product
+	 */
 	void save(Product product);
 	
+	/**
+	 * Save SaleOrder
+	 * @param saleOrder
+	 */
 	void save(SaleOrder saleOrder);
 	
 		

@@ -6,6 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SecurityController {
+	
+	/**
+	 * This controller is used for the login process
+	 * @param model
+	 * @return
+	 */
 
 	@RequestMapping(value="/login")               
 	public String login(Model model) {
@@ -14,7 +20,6 @@ public class SecurityController {
 	
 	@RequestMapping(value="/loginfail")           
 	public String loginFail(Model model) {
-		System.out.println("Here1 loginfailed");
 		model.addAttribute("errorMsg","Login Failed!");
 		return "login";
 	}

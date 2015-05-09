@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ContentController {
 	
 	/**
-	 * this URL comes from the spring-infrastructure.xml file
+	 * this URL comes from the beans.xml file
 	 * @param model
 	 * @return content view
 	 */

@@ -11,6 +11,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 public class CreditCardMapper implements RowMapper<CreditCard> {
 
+	/**
+	 * here i am using RowMapper the retrieve and add CreditCard information to the database
+	 */
 	public CreditCard mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CreditCard cc = new CreditCard();
 		
@@ -20,8 +23,8 @@ public class CreditCardMapper implements RowMapper<CreditCard> {
 		cc.setEmail(rs.getString("email"));
 		cc.setExpMonth(rs.getInt("expmonth"));
 		cc.setExpYear(rs.getInt("expyear"));
-		cc.setSecurityCode(rs.getInt("securityCode"));
-		cc.setCardType(rs.getString("cardType"));
+		cc.setSecurityCode(rs.getInt("security"));
+		cc.setCardType(rs.getString("cardtype"));
 				
 		return cc;
 	}

@@ -122,6 +122,7 @@ public class SaleOrderControllerTest {
 	/**
 	 * test method to check the the Array list being returned to the method is not empty
 	 * and that the correct view is being called.
+	 * It also is testing the saleOrder.getCustomerEmail Method
 	 * @throws Exception
 	 */
 	@Test
@@ -129,6 +130,7 @@ public class SaleOrderControllerTest {
 		String view = tested.listProduct(model);
 		assertThat(view, CoreMatchers.equalTo("ProductOrderForm"));
 		assertThat(model.get("productList"), notNullValue());
+		assertThat(tested.so.getCustomerEmail(), notNullValue());
 		verify(ss).findAll();
 	}
 	

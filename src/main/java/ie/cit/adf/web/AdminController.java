@@ -20,9 +20,9 @@ public class AdminController {
 		this.adminService = adminService;
 	}
 	/**
-	 * this URL comes from the spring-infrastructure.xml file
+	 * this URL comes from the UserController
 	 * @param model
-	 * @return content view
+	 * @return content view & a list of previously purchased orders.
 	 */
 	@RequestMapping(value="/", method=RequestMethod.GET)   
 	public String listPurchaseHist(Model model) {

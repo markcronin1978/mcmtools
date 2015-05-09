@@ -4,6 +4,13 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.domain.Product;
 import ie.cit.adf.service.ProductService;
@@ -14,6 +21,7 @@ import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.BindingResult;
 
 public class ProductControllerTest {
 
@@ -27,6 +35,7 @@ public class ProductControllerTest {
 		productService = mock(ProductService.class);
 		tested = new ProductController(productService);
 		model = new ExtendedModelMap();
+		BindingResult result = mock(BindingResult.class);
 		
 		/**
 		 * I am creating a mock product to use for testing functions
@@ -42,7 +51,7 @@ public class ProductControllerTest {
 		/**
 		 * I am declaring that when the save function is called, the mock product will be save. 
 		 */
-		tested.save(p);
+		tested.save(p, result, model);
 		
 	}
 	
@@ -71,10 +80,16 @@ public class ProductControllerTest {
 	}
 	
 	/**
-	 * test the method to save a new product. 	
+	 * test the method to save a new product. 
+	 * test the javax validator	
 	 */
 	@Test
 	public void testSave(){
+		
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();	
+		
+		Set<ConstraintViolation<Product>> constraintViolations = validator.validateValue(Product.class, "name", "Trition");
+		assertEquals(0, constraintViolations.size());
 		
 		Mockito.verify(productService).save(Mockito.argThat(new ArgumentMatcher<Product>(){
 			@Override

@@ -3,10 +3,14 @@ package ie.cit.adf.web;
 
 
 
+import javax.validation.Valid;
+
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CustomerController {
 	
 	private CustomerService customerService;
+	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	@Autowired
 	public CustomerController(CustomerService customerService){
@@ -51,14 +56,20 @@ public class CustomerController {
 	
 	/**
 	 * saves a new Customer
+	 * encodes the new customer password
 	 * @param customer
 	 * @return redirected view to customerList
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String addCustomer(@ModelAttribute Customer customer) {
-		customerService.save(customer);	
-		return "redirect:/customer/";
-				
+	public String addCustomer(@ModelAttribute @Valid Customer customer, BindingResult results, Model model) {
+		if(results.hasErrors()){
+			return "customerForm";
+		}else{
+			String encodedPass = passwordEncoder.encode(customer.getPassword());
+			customer.setPassword(encodedPass);
+			customerService.save(customer);	
+			return "redirect:/customer/";
+		}		
 	}
 
 }

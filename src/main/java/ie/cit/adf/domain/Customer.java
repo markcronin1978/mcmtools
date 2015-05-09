@@ -2,17 +2,28 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+
 
 
 public class Customer {
-
+	
+	@NotEmpty
 	private String id;
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
+	@NotEmpty
 	private String address1;
+	@NotEmpty
 	private String address2;
+	@NotEmpty
 	private String address3;
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String password;
 	
 	public Customer(){
@@ -93,7 +104,7 @@ public class Customer {
 	}
 	
 	public void setPassword(String password){
-		this.password =password;
+		this.password = password;
 	}
 
 	@Override

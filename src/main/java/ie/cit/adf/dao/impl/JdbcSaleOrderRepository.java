@@ -24,14 +24,8 @@ public class JdbcSaleOrderRepository implements SaleOrderRepository {
 	}
 
 	/**
-	 * return a list of previously purchased products.
+	 * Save Sale Order to database
 	 */
-/**	public List<SaleOrder> purchaseHist(String name) {
-		String sql = "SELECT * From product WHERE email = ?";	
-		return jdbcTemplate.query(sql, new SaleOrderMapper(), name);
-
-	} **/
-
 	public void save(SaleOrder saleOrder) {
 		jdbcTemplate
 			.update("INSERT INTO saleorder (id, customeremail, productsku, quantity, cost)"
@@ -40,6 +34,9 @@ public class JdbcSaleOrderRepository implements SaleOrderRepository {
 							saleOrder.getCost());
 		}
 
+	/**
+	 * return a list of sale orders
+	 */
 	public List<SaleOrder> findAll() {
 		String sql = "SELECT * From saleorder";
 		return jdbcTemplate.query(sql, new SaleOrderMapper());

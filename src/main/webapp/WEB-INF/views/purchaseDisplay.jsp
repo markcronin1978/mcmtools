@@ -1,9 +1,6 @@
-<!-- this is the productDisplay.jsp page. It displays the entire order to the customer before they commit to buy. -->
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 	<jsp:include page="header.jsp" />
 				

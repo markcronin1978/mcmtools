@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/userRole")
 public class UserController {
 	
+	/**
+	 * This controller is used to distinguish the role of the user logging in. 
+	 * Checks is user is administrator, then redirects them to the AdminController
+	 * if a customer, redirects them to the SaleOrderController
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	private String getUserDetails(Model model) {
 		   UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().

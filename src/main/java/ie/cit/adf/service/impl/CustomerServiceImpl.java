@@ -3,6 +3,7 @@ package ie.cit.adf.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ie.cit.adf.dao.CustomerRepository;
@@ -13,6 +14,7 @@ import ie.cit.adf.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService{
 	
 	private CustomerRepository customerRepository;
+
 	
 	@Autowired
 	public CustomerServiceImpl(CustomerRepository customerRepository){

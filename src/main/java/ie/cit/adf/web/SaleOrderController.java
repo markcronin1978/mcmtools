@@ -1,8 +1,7 @@
 package ie.cit.adf.web;
 
 
-
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import ie.cit.adf.domain.CreditCard;
 import ie.cit.adf.domain.Product;
@@ -10,10 +9,10 @@ import ie.cit.adf.domain.SaleOrder;
 import ie.cit.adf.service.SaleOrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/saleorderController")
 public class SaleOrderController {
 	
-	SaleOrder so = new SaleOrder();		
+	SaleOrder so = new SaleOrder();	
 	Product P;
 	
 										  
@@ -35,14 +34,10 @@ public class SaleOrderController {
 		this.saleOrderService = saleOrderService;
 	}
 	
-   /* @RequestMapping(value = "/username", method = RequestMethod.GET)
-    public void currentUserName(Principal principal) {
-    	so.setCustomerEmail(principal.getName());
-        //return principal.getName();
-    }*/
-	
 	/**
-	 * Return a list of all products to the ProductOrderForm
+	 * Return a list of all products to the ProductOrderForm.
+	 * Reinitialize the saleOrder Class.
+	 * Setting the Customer Email to the sale Order.
 	 * @param model
 	 * @return ProductOrderForm view
 	 */
@@ -71,7 +66,8 @@ public class SaleOrderController {
 	 * Quantity of selected item to purchase
 	 * with a two checks, one to verify that a quantity 
 	 * has being entered and the other to verify that it
-	 * does not exceed the stock level for that product	
+	 * does not exceed the stock level for that product.	
+	 * Setting the quantity of item in the sale order.
 	 * @param quantity
 	 * @param model
 	 * @return possible of three views defined to on the result of the if statement
@@ -98,7 +94,8 @@ public class SaleOrderController {
 	}
 	/**
 	 * This method is used to take information from the customer
-	 * about the credit card details
+	 * about the credit card details, if credit card information
+	 * already exists for the customer it will return it to the customer
 	 * @param model
 	 * @return
 	 */
@@ -110,12 +107,31 @@ public class SaleOrderController {
 		return "payment";
 	}
 	
+	/**
+	 * This method is used to save the credit card information to the database, 
+	 * If the payment information is entered fully an error is declared and the
+	 * customer is redirected back to the payment.jsp page to reenter the infomation
+	 * correctly.
+	 * @param creditCard
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
-	public String pay(@ModelAttribute CreditCard creditCard, Model model){
-		saleOrderService.save(creditCard); 
-		return "redirect:/saleorderController/display";
+	public String pay(@ModelAttribute @Valid CreditCard creditCard, BindingResult results, Model model){
+		if(results.hasErrors()){
+			return "payment";
+		}else{
+			saleOrderService.save(creditCard); 
+			return "redirect:/saleorderController/display";
+		}
 	}
 	
+	/**
+	 * Here i am display the purchase order to the customer, 
+	 * also setting the cost of the order
+	 * @param model
+	 * @return the Sale Order object the logged in customer.
+	 */
 	@RequestMapping(value="/display", method=RequestMethod.GET)
 	public String displayDetails(Model model){
 		
@@ -128,10 +144,18 @@ public class SaleOrderController {
 		model.addAttribute("saleOrder", so);
 		return "purchaseDisplay";
 	}
-	
+	/**
+	 * Method will save the order the database and return the customer 
+	 * to the list product page. 
+	 * @param saleOrder
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="/confirm", method=RequestMethod.POST) 
 	public String confirmOrder(@ModelAttribute SaleOrder saleOrder, Model model){
-		saleOrderService.save(saleOrder);		 
+		String message = "Thank You!, Youre Order will be dispatched as soon as possible";
+		saleOrderService.save(saleOrder);
+		so = new SaleOrder();
 		return "redirect:/saleorderController/";	
 	}	
 }

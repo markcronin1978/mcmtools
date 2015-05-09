@@ -2,14 +2,18 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 
 public class Product {
 	
 	private String id;
 	private int SKU;
+	@NotEmpty
 	private String name;
-	private String description;
+	@NotEmpty
+	private String description;	
 	private double pricePerUnit;
 	private int stockLevel;
 	

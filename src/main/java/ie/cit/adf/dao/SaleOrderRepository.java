@@ -7,11 +7,16 @@ import java.util.List;
 
 public interface SaleOrderRepository {
 
-
-	//List<SaleOrder> purchaseHist(String name);
-
+	/**
+	 * save a specific sale order
+	 * @param saleOrder
+	 */
 	void save(SaleOrder saleOrder);
 
+	/**
+	 * return a list of previous sale orders.
+	 * @return
+	 */
 	List<SaleOrder> findAll();
 	
 

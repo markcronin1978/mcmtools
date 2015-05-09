@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public interface AdminService {
 
+	/**
+	 * Return a list of SaleOrders
+	 * @return
+	 */
 	List<SaleOrder> findAll();
 
 }

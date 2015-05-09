@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 public class SaleOrderMapper implements RowMapper<SaleOrder> {
 	
 	/**
-	 * here i am using RowMapper the retrieve and add product information to the database
+	 * here i am using RowMapper the retrieve and add SaleOrder information to the database
 	 */
 	public SaleOrder mapRow(ResultSet rs, int i) throws SQLException {
 		SaleOrder so = new SaleOrder();

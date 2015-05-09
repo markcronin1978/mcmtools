@@ -14,30 +14,37 @@
 							<tr>
 								<td>First name: </td>
 								<td><form:input path="firstName" size="50" /></td>
+								<td><form:errors path="firstName" style="color:red" cssclass="error" ></form:errors></td>
 							</tr>
 							<tr>
 								<td>Last name: </td>
 								<td><form:input path="lastName" size="50" /></td>
+								<td><form:errors path="lastName" style="color:red" cssclass="error" ></form:errors></td>
 							</tr>
 							<tr>
 								<td>Address 1:</td>
 								<td><form:input path="address1" size="50" /></td>
+								<td><form:errors path="address1" style="color:red" cssclass="error" ></form:errors></td>
 							</tr>
 							<tr>
 								<td>Address 2:</td>
-								<td><form:input path="address2" size="50" /></td>								
+								<td><form:input path="address2" size="50" /></td>
+								<td><form:errors path="address2" style="color:red" cssclass="error" ></form:errors></td>								
 							</tr>
 							<tr>
 								<td>Address 3:</td>
-								<td><form:input path="address3" size="50" /></td>								
+								<td><form:input path="address3" size="50" /></td>
+								<td><form:errors path="address3" style="color:red" cssclass="error" ></form:errors></td>								
 							</tr>
 							<tr>
 								<td>Email Address</td>
-								<td><form:input path="email" size="50" /></td>							
+								<td><form:input path="email" size="50" /></td>
+								<td><form:errors path="email" style="color:red" cssclass="error" ></form:errors></td>							
 							</tr>
 							<tr>
 								<td>Password</td>
-								<td><form:input path="password" size="50" /></td>								
+								<td><form:input path="password" size="50" /></td>
+								<td><form:errors path="password" style="color:red" cssclass="error" ></form:errors></td>								
 							</tr>
 							<tr>						
 								<td><form:hidden path="id" /></td>

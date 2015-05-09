@@ -18,6 +18,10 @@ public class AdminServiceImpl implements AdminService{
 	public AdminServiceImpl (SaleOrderRepository saleOrderRepository){
 		this.saleOrderRepository = saleOrderRepository;
 	}
+	
+	/**
+	 * return a list of SaleOrders
+	 */
 	public List<SaleOrder> findAll() {
 		return saleOrderRepository.findAll();
 	}

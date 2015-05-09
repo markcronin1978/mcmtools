@@ -6,8 +6,22 @@ import static org.mockito.Mockito.verify;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 
+
+
+
+
+
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.service.CustomerService;
+
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Description;
 import org.junit.Before;
@@ -15,24 +29,29 @@ import org.junit.Test;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.springframework.ui.ExtendedModelMap;
+import org.springframework.validation.BindingResult;
 
 public class CustomerControllerTest {
 	
 	private CustomerService customerService;
 	private CustomerController tested;
 	private ExtendedModelMap model;
+	private static Validator validator;
+	private Customer customer;
 	
 	@Before
 	public void setup(){
 		customerService = mock(CustomerService.class);
 		tested = new CustomerController(customerService);
 		model = new ExtendedModelMap();
+		BindingResult result = mock(BindingResult.class);		
+
 		
 		/**
 		 * here i am create a new customer to use in the 
 		 * testing of the save customer function
 		 */
-		Customer customer = new Customer();
+		customer = new Customer();
 		customer.setId("L1");
 		customer.setAddress1("The Street");
 		customer.setAddress2("The Neighbourhood");
@@ -45,7 +64,7 @@ public class CustomerControllerTest {
 		/**
 		 * I am declaring that when the addCustomer function is called, the mock customer will be save. 
 		 */
-		tested.addCustomer(customer);
+		tested.addCustomer(customer, result, model);	
 		
 	}	
 	
@@ -69,18 +88,21 @@ public class CustomerControllerTest {
 	@Test
 	public void testFormCustomer() throws Exception {
 		String view = tested.formCustomer(model);
-		assertThat(view, CoreMatchers.equalTo("customerForm"));
-		/*assertThat(model.get("customer"), notNullValue());
-		System.out.println(model.get("customer").getClass().getName().toString());*/
-		//verify(tested).formCustomer(model);
-		
+		assertThat(view, CoreMatchers.equalTo("customerForm"));		
 	}
 	
 	/** 
 	 * test the addCustomer function
+	 * test the javax validator
 	 */
 	@Test
 	public void testAddCustomer(){
+
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();	
+		
+		Set<ConstraintViolation<Customer>> constraintViolations = validator.validateValue(Customer.class, "firstName", "Tom");
+		assertEquals(0, constraintViolations.size());
+
 		
 		Mockito.verify(customerService).save(Mockito.argThat(new ArgumentMatcher<Customer>(){
 			@Override
