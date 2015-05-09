@@ -38,6 +38,7 @@ public class CustomerControllerTest {
 	private ExtendedModelMap model;
 	private static Validator validator;
 	private Customer customer;
+	private Customer customer1;
 	
 	@Before
 	public void setup(){
@@ -60,6 +61,16 @@ public class CustomerControllerTest {
 		customer.setLastName("Hardy");
 		customer.setEmail("tomhardy@yahoo.com");
 		customer.setPassword("password");
+		
+		customer1 = new Customer();
+		customer1.setId("L1");
+		customer1.setAddress1("");
+		customer1.setAddress2("The Neighbourhood");
+		customer1.setAddress3("Cork");
+		customer1.setFirstName("");
+		customer1.setLastName("Hardy");
+		customer1.setEmail("tomhardy@yahoo.com");
+		customer1.setPassword("password");
 		
 		/**
 		 * I am declaring that when the addCustomer function is called, the mock customer will be save. 
@@ -110,15 +121,6 @@ public class CustomerControllerTest {
 				return ((Customer) argument).getFirstName().equals("Tom");
 			}
 		}));
-		//verify(cs).save(customer);
-		//cs.save(customer);
-		//Mockito.verify(cs).save(customer);
-		//Customer c = cs.getByEmailAddress("tomhardy@yahoo.com");
-		//c.getFirstName().toString();
-		//System.out.println(customer2.getFirstName().toString());
-		//assertTrue(c.getFirstName().equals("Tom"));
-		
-		
-		
 	}
+
 }

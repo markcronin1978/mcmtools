@@ -36,7 +36,6 @@ public class SaleOrderController {
 	
 	/**
 	 * Return a list of all products to the ProductOrderForm.
-	 * Reinitialize the saleOrder Class.
 	 * Setting the Customer Email to the sale Order.
 	 * @param model
 	 * @return ProductOrderForm view
@@ -97,7 +96,7 @@ public class SaleOrderController {
 	 * about the credit card details, if credit card information
 	 * already exists for the customer it will return it to the customer
 	 * @param model
-	 * @return
+	 * @return payment view
 	 */
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public String paymentDetails(Model model){
@@ -110,11 +109,11 @@ public class SaleOrderController {
 	/**
 	 * This method is used to save the credit card information to the database, 
 	 * If the payment information is entered fully an error is declared and the
-	 * customer is redirected back to the payment.jsp page to reenter the infomation
+	 * customer is redirected back to the payment.jsp page to reenter the information
 	 * correctly.
 	 * @param creditCard
 	 * @param model
-	 * @return
+	 * @return redirects to SaleorderController/display method
 	 */
 	@RequestMapping(value = "/pay", method = RequestMethod.POST)
 	public String pay(@ModelAttribute @Valid CreditCard creditCard, BindingResult results, Model model){
@@ -130,7 +129,7 @@ public class SaleOrderController {
 	 * Here i am display the purchase order to the customer, 
 	 * also setting the cost of the order
 	 * @param model
-	 * @return the Sale Order object the logged in customer.
+	 * @return purchaseDisplay view.
 	 */
 	@RequestMapping(value="/display", method=RequestMethod.GET)
 	public String displayDetails(Model model){
@@ -147,9 +146,10 @@ public class SaleOrderController {
 	/**
 	 * Method will save the order the database and return the customer 
 	 * to the list product page. 
+	 * Reinitializes SaleOrder Class.
 	 * @param saleOrder
 	 * @param model
-	 * @return
+	 * @return redirects to saleorderController/ method
 	 */
 	@RequestMapping(value="/confirm", method=RequestMethod.POST) 
 	public String confirmOrder(@ModelAttribute SaleOrder saleOrder, Model model){
