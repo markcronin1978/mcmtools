@@ -4,26 +4,13 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.hamcrest.CoreMatchers.notNullValue;
-
-
-
-
-
-
-
-
 import java.util.Set;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import ie.cit.adf.domain.Customer;
 import ie.cit.adf.service.CustomerService;
-
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Description;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
@@ -36,7 +23,6 @@ public class CustomerControllerTest {
 	private CustomerService customerService;
 	private CustomerController tested;
 	private ExtendedModelMap model;
-	private static Validator validator;
 	private Customer customer;
 	private Customer customer1;
 	

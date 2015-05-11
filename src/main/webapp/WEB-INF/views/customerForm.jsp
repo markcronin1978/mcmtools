@@ -5,7 +5,7 @@
 
 	<jsp:include page="header.jsp" />    <!-- I am including the Header.jsp page -->
 	
-		<jsp:include page="linkDisplay.jsp" />
+		<jsp:include page="linkDisplay.jsp" />	<!-- I am including the LinkDisplay.jsp page -->
 			
 			<p>Add Customer</p>
 				<c:url value="/customer/" var="form_url"/>    
@@ -53,4 +53,4 @@
 						</table>
 					</form:form>
 					
-	<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.jsp" />	<!-- I am including the footer.jsp page -->

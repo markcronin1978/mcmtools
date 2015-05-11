@@ -153,7 +153,6 @@ public class SaleOrderController {
 	 */
 	@RequestMapping(value="/confirm", method=RequestMethod.POST) 
 	public String confirmOrder(@ModelAttribute SaleOrder saleOrder, Model model){
-		String message = "Thank You!, Youre Order will be dispatched as soon as possible";
 		saleOrderService.save(saleOrder);
 		so = new SaleOrder();
 		return "redirect:/saleorderController/";	

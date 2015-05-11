@@ -39,13 +39,11 @@ public class SaleOrderControllerTest {
 	private SaleOrderService ss;
 	private SaleOrderController tested;
 	private ExtendedModelMap model;
-	//private Authentication auth;
 	
 	
 	@Before
 	public void setup(){
 		ss = mock(SaleOrderService.class);
-		//auth = SecurityContextHolder.getContext().getAuthentication();
 		tested = new SaleOrderController(ss);
 		model = new ExtendedModelMap();
 		
